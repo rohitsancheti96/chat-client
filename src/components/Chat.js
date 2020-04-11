@@ -17,7 +17,6 @@ function Chat() {
 
   useEffect(() => {
     const { username, room } = queryString.parse(window.location.search);
-    console.log(username, room);
 
     socket = io(ENDPOINT);
 
@@ -28,13 +27,11 @@ function Chat() {
     socket.on("roomUsers", ({ room, users }) => {
       setRoom(room);
       setUsers(users);
-      console.log(users);
     });
   }, []);
 
   useEffect(() => {
     socket.on("message", (message) => {
-      console.log(message);
       setMessages((messages) => [...messages, message]);
     });
   }, []);
